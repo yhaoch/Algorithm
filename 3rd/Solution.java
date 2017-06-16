@@ -1,63 +1,63 @@
+
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Solution {
+	//Using DP to solve the problem. DP[i] = DP[i-1] + 1;
     public static int lengthOfLongestSubstring(String s) {
     	//HashMap<Integer,String> index_table = new HashMap<Integer,String>();
     	HashMap<Character,Integer> index_char = new HashMap<Character,Integer>();
-    	String temp = "";
-    	int idx = 0;
-    	int max = 0;
+    	int m = 0;
+    	int start = 0;
     	if(s.length() == 0){
 			return 0;
 		}
+		else if(s.length() == 1)
+			return 1;
     	else{
-    		int count = 0;
-	    	while(true){
-	    		if(s.length() == 1){
-					if(s.length() >= max)
-						max = s.length();
-					break;
-	    		}
-	    		else if(idx == s.length()){
-	    			if(s.length() >= max)
-						max = s.length();
-	    			break;
+    		int max[] = new int[s.length()];
+    		max[0] = 1;
+    		index_char.put(s.charAt(0),0);
+	    	for(int j = 1;j< s.length();j++){
+	    		char te = s.charAt(j);
+	    		//System.out.println(te);
+	    		if(index_char.get(te) != null && start <= index_char.get(te)){
+	    			//System.out.println(temp);
+    				max[j] = j - index_char.get(te);
+    				start = index_char.get(te) + 1;
+    				index_char.put(te,j);
+	    			//System.out.println(m);
+	    			//System.out.print(i);
+	    			//System.out.println(s);
+	    			//s = s.substring(index_char.get(te) + 1, s.length());
 	    		}
 	    		else{
-		    		char te = s.charAt(idx);
-		    		//System.out.println(te);
-		    		if(index_char.get(te) != null){
-		    			//System.out.println(temp);
-		    			if(temp.length() >= max)
-							max = temp.length();
-		    			//System.out.println(s);
-		    			s = s.substring(index_char.get(te) + 1, s.length());
-		    			index_char.clear();
-		    			//System.out.println(s);
-		    			//System.out.println(s.length());
-		    			//s = s.substring(idx, s.length());
-		//    			System.out.println(idx);
-		//    			System.out.println(s.length());
-		    			//System.out.println(s);
-		    			temp = "";
-		    			idx = 0;
-		    		}
-		    		else{
-		    			index_char.put(te,idx);
-		    			temp += te;
-		    			//System.out.println(temp);
-		    			idx ++;
-		    		}
-		    	}
+	    			index_char.put(te,j);
+	    			max[j] = max[j-1] + 1;
+	    		}
+	    		if(max[j] > m)
+	    			m = max[j];
 	    	}
-    		// int maxKey = 0;
-    		// for(Integer key: index_table.keySet()){
-    		// 	if(maxKey < key)
-    		// 		maxKey = key;
-    		// }
-    		return max;
+	    	return m;
     	}
+    }
+
+    //From the internet: http://www.cnblogs.com/beetle-shu/p/4175651.html
+	public static int lengthOfLongestSubstring1(String s) {
+        int strLength = s.length();
+        int maxLength = -1;
+        int start = 0;
+        for (int i = 1; i < strLength; i++) {
+            char temp = s.charAt(i);
+            for (int j = i; j > start; j--) {
+                if (s.charAt(j-1)== temp) {
+                    maxLength = (maxLength >(i-start))?maxLength:(i-start);
+                    start = j;
+                }
+            }
+        }
+        maxLength = (maxLength >(strLength-start))?maxLength:(strLength-start);
+        return maxLength;
     }
     
     
@@ -65,7 +65,16 @@ public class Solution {
   //   	Scanner sc = new Scanner(System.in);
 		// String str = sc.nextLine();
 		
-		String s="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~ abcdefghijklmnopqrstuvwxyzABCD";
-    	System.out.println(lengthOfLongestSubstring(s));
+    	String s="abcabcbb";
+    	long start=System.currentTimeMillis();   //获取开始时间  
+		int ans = lengthOfLongestSubstring(s);
+		long end=System.currentTimeMillis(); //获取结束时间  
+		System.out.println("程序运行时间: " + (end-start) +"ms"); 
+		long start1=System.currentTimeMillis();   //获取开始时间  
+		int ans1 = lengthOfLongestSubstring1(s);
+		long end1=System.currentTimeMillis(); //获取结束时间  
+		System.out.println("程序运行时间: " + (end1-start1) +"ms"); 
+    	System.out.println(ans);
+    	System.out.println(ans1);
     }
 }
