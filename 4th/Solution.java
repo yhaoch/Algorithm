@@ -7,16 +7,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Solution {
-<<<<<<< HEAD
-	//bfs
-	Queue<Integer> q = new LinkedList<Integer>();
-	TreeNode resultTree;
-    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
-=======
-
 //    Queue<Integer> q = new LinkedList<Integer>();
     public static TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
->>>>>>> 03e2ef6e4eb1d439de5aa99bb9464a130c71b313
         if(t1 == null && t2 != null)
             return t2;
         else if(t2 == null && t1 != null)
@@ -85,22 +77,6 @@ public class Solution {
             if(node.right != null) queue.add(node.right);
         }
     }
-<<<<<<< HEAD
-   	public void merge(TreeNode t1, TreeNode t2){
-   		if(t1 == null && t2 != null)
-        	return t2;
-        else if(t2 == null && t1 != null)
-        	return t1;
-        else if(t1 == null && t2 == null)
-        	return null;
-        else{
-        	
-        }
-   	}
-}
-=======
-
-
     public static void main(String args[]){
         TreeNode t1 = new TreeNode(1);
         t1.left = new TreeNode(3);
@@ -116,4 +92,3 @@ public class Solution {
         breadth(ans);
     }
 }
->>>>>>> 03e2ef6e4eb1d439de5aa99bb9464a130c71b313
