@@ -7,10 +7,11 @@ public class Solution {
         int count = 0;
         String s1 = transform(x);
         String s2 = transform(y);
-        System.out.println(s1 + "    " + s2);
+        //System.out.println(s1 + "    " + s2);
         String s = "";
         int len1 = s1.length();
         int len2 = s2.length();
+        //System.out.println(len1 + " " + len2);
         int min = 0;
         int max = 0;
         if(len1 > len2) {
@@ -28,13 +29,16 @@ public class Solution {
                     len1--;
                     len2--;
                 }
-                if((max - min -1)!=0)
-                    for (int i = 0; i < (max - min - 1); i++)
-                        if (s.charAt(i) == '1')
-                            count++;
-                        else
-                            count++;
             }
+            System.out.println(count);
+            if((len1 - len2 -1)!=0){
+                for (int i = 0; i < (len1 - len2); i++)
+                    if (s.charAt(i) == '1')
+                        count++;
+            }
+            else if((len1 - len2 -1)==0)
+                count++;
+            System.out.println(count);
         }
         else if(len1 < len2) {
             min = len1;
@@ -51,13 +55,17 @@ public class Solution {
                     len1--;
                     len2--;
                 }
-                if((max - min -1)!=0)
-                    for (int i = 0; i < (max - min - 1); i++)
-                        if (s.charAt(i) == '1')
-                            count++;
-                else
-                    count++;
             }
+            //System.out.println(count);
+            //System.out.println((max - min -1));
+            if((len2 - len1 -1)!=0){
+                for (int i = 0; i < (len2 - len1); i++)
+                    if (s.charAt(i) == '1')
+                        count++;
+            }
+            else if((len2 - len1 -1)==0)
+                count++;
+            //System.out.println(count);
         }
         else if(len1 == len2){
             min = len1;
@@ -91,9 +99,9 @@ public class Solution {
             ans = "1" + ans;
             return ans;
         }
-    }
+    }  
     public static void main(String args[]){
-        int x = 4,y=14;
+        int x = 14,y=2  ;
         System.out.println(hammingDistance(x,y));
         //System.out.println("0" + "0");
     }
