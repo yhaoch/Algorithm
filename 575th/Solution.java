@@ -18,20 +18,4 @@ public class Solution {
             return (len/2);
         }
     }
-
-    public static void main(String args[]){
-        String a [] = new String[3];
-        a[0] = "asdfghjklASDFGHJKLasdfghjklASDFGHJKLzxcvbnmZXCVBNMaew";
-        a[1] = "asdfghjklASDFGHJKLqwertyuiopQWERTYUIOP";
-        a[2] = "zxcvbnmZXCVBNMaewzxcvbnmZXCVBNMaewzxcvbnmZXCVBNMaewzxcvbnmZXCVBNMaew";
-        //a[3] = "Peace";
-        String[] result = findWords(a);
-        for(int i =0;i<result.length;i++)
-            System.out.println(result[i]);
-    }
-    /*
-    *
-["asdfghjklASDFGHJKLasdfghjklASDFGHJKLzxcvbnmZXCVBNMaew","asdfghjklASDFGHJKLqwertyuiopQWERTYUIOP","zxcvbnmZXCVBNMaewzxcvbnmZXCVBNMaewzxcvbnmZXCVBNMaewzxcvbnmZXCVBNMaew"]
-    *
-    * */
 }
