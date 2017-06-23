@@ -1,4 +1,5 @@
 public class Solution {
+    //cool 
     public int minMoves(int[] nums) {
         int count = 0;
         if(nums.length == 1)
