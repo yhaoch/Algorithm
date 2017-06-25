@@ -16,9 +16,6 @@ public class Solution {
             //     }
             // }
             recsiveSort(nums,0,len-1);
-            // for(int i = 0;i<len;i++){
-            //     System.out.println(nums[i]);
-            // }
             int product = nums[len-1] * nums[len-2] * nums[len-3];
             //System.out.println(product);
             if(product < 0){
