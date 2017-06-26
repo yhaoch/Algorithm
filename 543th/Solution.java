@@ -20,6 +20,7 @@ public class Solution {
         }
         return 0;
     }
+
     public int depth(TreeNode root){
         if(root == null)
             return 0;
