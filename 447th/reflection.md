@@ -1,0 +1,1 @@
+For every point in points, new a hashmap to strore the distance between it with other points. Key is `distance`, Value is the `frequency` of that `distance`. If the `frequency >= 2`, then we have together `frequency *  (frequency-1)`
