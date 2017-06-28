@@ -37,6 +37,7 @@ public class Solution {
             return nums[len-1] * nums[len-2] * nums[len-3];
         }
     }
+
     public int RTI(int[] list, int low, int high){
     int tmp = list[low];
     while(low < high){
@@ -52,6 +53,7 @@ public class Solution {
     list[low] = tmp;
     return low;
   }
+
   public void recsiveSort(int [] list, int low, int high){
     if(low < high){
       int mid = RTI(list, low, high);
