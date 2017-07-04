@@ -1,16 +1,18 @@
 public class Solution {
     public String addBinary(String a, String b) {
+        if(a.length() == 0 && b.length() == 0)
+            return "0";
         char carry = '0';
     	char [] addition;
-        int len1 = a.length()-1;
-        int len2 = b.length()-1;
+        int len1 = a.length();
+        int len2 = b.length();
         int maxlen = Math.max(a.length(),b.length());
         int minlen = Math.min(a.length(),b.length());
         String res = "";
-        System.out.println(len1 + " " + len2 + " " + minlen);
+        //System.out.println(len1 + " " + len2 + " " + minlen);
         while(maxlen > 0){
             if(minlen > 0){
-                addition = add(a.charAt(len1),b.charAt(len2),carry);
+                addition = add(a.charAt(len1-1),b.charAt(len2-1),carry);
                 //System.out.println(addition[0] + " " + addition[1]);
                 //System.out.println(minlen);
                 minlen--;
@@ -19,31 +21,27 @@ public class Solution {
                 len2 --;
                 carry = addition[0];
                 res += addition[1];
-                System.out.println(len1);
+                //System.out.println(len1);
                 continue;
             }
-            if(len1 <0 || len2 <0){
-                len1++;
-                len2++;
-            }
-            //System.out.println(len1 + " " + len2 + " " + minlen);
+            //System.out.println(len1 + " " + len2 + " " + maxlen);
             if(len1 == 0){
                 //b = b.substring(0,b.size()-a.size());
-                addition = add('0',b.charAt(len2),carry);
+                //System.out.println(len2);
+                addition = add('0',b.charAt(len2-1),carry);
                 len2 --;
                 maxlen--;
                 carry = addition[0];
                 res += addition[1];
             }
             else if(len2 == 0){
-                addition = add(a.charAt(len1),'0',carry);
+                addition = add(a.charAt(len1-1),'0',carry);
                 len1 --;
                 maxlen--;
                 carry = addition[0];
                 res += addition[1];
             }
             //System.out.println(res);
-            break;
         }
         if(carry == '1'){
             res += carry;
