@@ -6,20 +6,23 @@ public class Solution {
         int lower = upper / 10 + 1;
         long product = 0;
         long max = 0;
-        for(int i=upper;i>=lower;i--){
-            for(int j = i;j >=lower;j--){
-                product = i * j;
+        for(int i = upper;i >= lower;i--){
+            for(int j = i;j >= lower;j--){
+                product = (long)i * j;
                 if(product <= max)
                     break;
+                if(product % 10 != 9)
+                    continue;
                 else{
                     if(helper(product) == true && product > max){
+                        //System.out.println(product);
                         max = product;
-                    }  
+                    }
                 }
             }
         }
         //System.out.println(max);
-        return (int)max%1337;
+        return (int)(max%1337);
     }
     public boolean helper(long x){
         long temp = 0;
@@ -31,6 +34,6 @@ public class Solution {
         if(temp == input)
             return true;
         else
-            return false;  
+            return false;
     }
 }
