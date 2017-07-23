@@ -18,7 +18,7 @@ public class Solution {
     }
 }
 
-//Greedy 
+//Greedy is faster than greedy..
 public int findLongestChain(int[][] pairs) {
         if(pairs==null||pairs.length==0) return 0;
         int n = pairs.length;
